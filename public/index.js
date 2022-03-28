@@ -8,17 +8,21 @@ const characterName = document.querySelector("h2");
 
 async function rick() {
     let characterData;
+    let characterJson;
     let second;
+    let secondJson;
     try {
-        characterData = await fetch(url + characterId).then(data => {return data.json()});
-        console.log(characterData.name);
-        nameArray.push(characterData.name);
-        second = await fetch(url + "?name=" + nameArray[nameArray.length - 1]).then(data => {return data.json()});
-        console.log(second);
+        characterData = await fetch(url + characterId);
+        characterJson = await characterData.json();
+        console.log(characterJson.name);
+        nameArray.push(characterJson.name);
+        second = await fetch(url + "?name=" + nameArray[nameArray.length - 1]);
+        secondJson = await second.json();
+        console.log(secondJson);
         characterName.innerText = "";
         characterImage.src = "";
-        characterName.innerText = second.results[0].name;
-        characterImage.src = second.results[0].image;
+        characterName.innerText = secondJson.results[0].name;
+        characterImage.src = secondJson.results[0].image;
     }
     finally {
         return second
