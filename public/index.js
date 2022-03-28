@@ -19,12 +19,14 @@ async function rick() {
         second = await fetch(url + "?name=" + nameArray[nameArray.length - 1]);
         secondJson = await second.json();
         console.log(secondJson);
+        
+    } catch (err) {
+        console.log(err);
+    } finally {
         characterName.innerText = "";
         characterImage.src = "";
         characterName.innerText = secondJson.results[0].name;
         characterImage.src = secondJson.results[0].image;
-    }
-    finally {
         return second
     }
    
